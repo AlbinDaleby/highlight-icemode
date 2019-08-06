@@ -3,7 +3,7 @@
     "displayName": "highlight-icemode-cs",
     "description": "Highlight all selected occurrences of words. (border mode) (case sensitive)",
     "version": "0.0.1",
-    "publisher": "Albin Daleby",
+    "publisher": "AlbinDaleby",
     "icon": "images/icon.png",
     "engines": {
         "vscode": "^1.12.0"
