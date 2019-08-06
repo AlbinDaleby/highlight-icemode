@@ -1,9 +1,9 @@
 {
-    "name": "highlight-icemode",
-    "displayName": "highlight-icemode",
-    "description": "Highlight all selected occurrences of words. (border mode)",
-    "version": "0.0.6",
-    "publisher": "iceliu",
+    "name": "highlight-icemode-cs",
+    "displayName": "highlight-icemode-cs",
+    "description": "Highlight all selected occurrences of words. (border mode) (case sensitive)",
+    "version": "0.0.1",
+    "publisher": "Albin Daleby",
     "icon": "images/icon.png",
     "engines": {
         "vscode": "^1.12.0"
@@ -15,7 +15,7 @@
         "*"
     ],
     "main": "./extension",
-    
+
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
@@ -25,7 +25,7 @@
             "type": "object",
             "title": "highlight-icemode configuration",
             "properties": {
-                "highlight-icemode.borderWidth": {
+               "highlight-icemode.borderWidth": {
                     "type": "string",
                     "default": "1px",
                     "description": "Set Border Size"
@@ -44,13 +44,18 @@
                     "type": "string",
                     "default": "",
                     "description": "Set backgroundColor"
+                },
+                "highlight-icemode.caseSensitive": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Toggle case sensitivity"
                 }
             }
         }
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/EsIce/highlight-icemode"
+        "url": "https://github.com/AlbinDaleby/highlight-icemode-cs"
     },
     "devDependencies": {
         "vscode": "^1.1.5"

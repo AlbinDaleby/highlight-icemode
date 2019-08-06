@@ -5,13 +5,12 @@ function activate(context) {
     var timeout = null;
     var activeEditor = vscode.window.activeTextEditor;
     var decorationTypes = {};
-  
 
     vscode.window.onDidChangeTextEditorSelection(function (event) {
         //var aaa = activeEditor.document.getText(activeEditor.selection);
         //console.log("1onDidChangeTextEditorSelection:" + aaa);
         triggerUpdateDecorations();
-    
+
     }, null, context.subscriptions);
 
     vscode.window.onDidChangeActiveTextEditor(function (editor) {
@@ -40,19 +39,23 @@ function activate(context) {
             return;
         }
         try {
+            var config = vscode.workspace.getConfiguration('highlight-icemode');
+            var borderWidth = config.borderWidth;
+            var borderRadius = config.borderRadius;
+            var borderColor = config.borderColor;
+            var backgroundColor = config.backgroundColor;
+            var caseSensitive = config.caseSensitive;
             var text = activeEditor.document.getText();
             var word = activeEditor.document.getText(activeEditor.selection);
             word = word.replace(/[\W_]/g, "\\$&");  //在特殊字元前面加上 “\\” thanks harlen
             //console.log("1word:"+word);
             var mathes = {}, match;
-            var opts = 'gi';
+            var opts = 'g';
+            if (!caseSensitive) {
+                opts += 'i';
+            }
             var pattern = new RegExp(word, opts);
             if (word != "") {
-                var config = vscode.workspace.getConfiguration('highlight-icemode');
-                var borderWidth = config.borderWidth;
-                var borderRadius = config.borderRadius;
-                var borderColor = config.borderColor;
-                var backgroundColor = config.backgroundColor;
                 while (match = pattern.exec(text)) {
                     var startPos = activeEditor.document.positionAt(match.index);
                     var endPos = activeEditor.document.positionAt(match.index + match[0].length);
@@ -67,7 +70,7 @@ function activate(context) {
                     }
 
                     if (!decorationTypes[matchedValue]) {
-                       
+
                         decorationTypes[matchedValue] = vscode.window.createTextEditorDecorationType({
                             borderStyle: 'solid',
                             borderWidth: borderWidth,
@@ -87,7 +90,7 @@ function activate(context) {
             vscode.window.setStatusBarMessage("highlight-icemode got some error. but it's ok! dont' be afraid !",3000);
             console.log(err.message);
         }
-        
+
     }
 }
 exports.activate = activate;
